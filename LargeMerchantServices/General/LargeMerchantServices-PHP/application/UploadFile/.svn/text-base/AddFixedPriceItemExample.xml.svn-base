@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BulkDataExchangeRequests>
+	<Header>
+		<SiteID>0</SiteID>
+		<Version>663</Version>
+	</Header>
+	<AddFixedPriceItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+		<ErrorLanguage>en_US</ErrorLanguage>
+		<WarningLevel>High</WarningLevel>
+		<Version>663</Version>
+    <MessageID>Request 1</MessageID>
+		<Item>
+			<SKU>49203489082034</SKU>
+			<Country>US</Country>
+			<Currency>USD</Currency>
+			<Description>An interesting item description</Description>
+			<DispatchTimeMax>3</DispatchTimeMax>
+			<InventoryTrackingMethod>SKU</InventoryTrackingMethod>
+			<ListingDuration>Days_7</ListingDuration>
+			<ListingType>FixedPriceItem</ListingType>
+			<PostalCode>95125</PostalCode>
+			<PaymentMethods>PayPal</PaymentMethods>
+			<PayPalEmailAddress>example@example.com</PayPalEmailAddress>
+			<PrimaryCategory>
+				<CategoryID>1463</CategoryID>
+			</PrimaryCategory>
+			<Quantity>10</Quantity>
+			<StartPrice>5.0</StartPrice>
+			<ShippingDetails>
+				<ShippingType>Flat</ShippingType>
+				<ShippingServiceOptions>
+					<ShippingServicePriority>1</ShippingServicePriority>
+					<ShippingService>USPSMedia</ShippingService>
+					<ShippingServiceCost>2.50</ShippingServiceCost>
+          <ShippingServiceAdditionalCost>1.50</ShippingServiceAdditionalCost>
+				</ShippingServiceOptions>
+			</ShippingDetails>
+			<Title>Testing LMS with the PHP Sample Code</Title>
+			<ReturnPolicy>
+				<ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>
+				<RefundOption>MoneyBack</RefundOption>
+				<ReturnsWithinOption>Days_30</ReturnsWithinOption>
+				<Description>Description of return policy details</Description>
+				<ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>
+			</ReturnPolicy>
+		</Item>
+	</AddFixedPriceItemRequest>
+	<AddFixedPriceItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+		<ErrorLanguage>en_US</ErrorLanguage>
+		<Version>663</Version>
+		<WarningLevel>High</WarningLevel>
+    <MessageID>Request 2</MessageID>
+		<Item>
+			<SKU>49203999082034</SKU>
+			<Country>US</Country>
+			<Currency>USD</Currency>
+			<Description>An interesting item description</Description>
+			<DispatchTimeMax>3</DispatchTimeMax>
+			<InventoryTrackingMethod>SKU</InventoryTrackingMethod>
+			<ListingDuration>Days_7</ListingDuration>
+			<ListingType>FixedPriceItem</ListingType>
+			<PostalCode>95125</PostalCode>
+			<PaymentMethods>PayPal</PaymentMethods>
+			<PayPalEmailAddress>example@example.com</PayPalEmailAddress>
+			<PrimaryCategory>
+				<CategoryID>1463</CategoryID>
+			</PrimaryCategory>
+			<Quantity>5</Quantity>
+			<StartPrice>7.0</StartPrice>
+			<ShippingDetails>
+				<ShippingType>Flat</ShippingType>
+				<ShippingServiceOptions>
+					<ShippingServicePriority>1</ShippingServicePriority>
+					<ShippingService>USPSMedia</ShippingService>
+					<ShippingServiceCost>2.50</ShippingServiceCost>
+          <ShippingServiceAdditionalCost>1.50</ShippingServiceAdditionalCost>
+				</ShippingServiceOptions>
+			</ShippingDetails>
+			<Title>Testing LMS with the PHP Sample Code</Title>
+			<ReturnPolicy>
+				<ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>
+				<RefundOption>MoneyBack</RefundOption>
+				<ReturnsWithinOption>Days_30</ReturnsWithinOption>
+				<Description>Description of return policy details</Description>
+				<ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>
+			</ReturnPolicy>
+		</Item>
+	</AddFixedPriceItemRequest>
+</BulkDataExchangeRequests>
