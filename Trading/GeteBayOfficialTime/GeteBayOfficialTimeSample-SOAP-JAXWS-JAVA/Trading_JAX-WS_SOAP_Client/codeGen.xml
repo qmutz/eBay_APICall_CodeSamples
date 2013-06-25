@@ -1,0 +1,75 @@
+<?xml version="1.0" standalone="yes"?>
+<project basedir="." default="archive">
+  <description></description>
+  <property environment="env"/>
+  <property name="jwsdp.home" value="${env.JWSDP_HOME}"/>
+  <path id="classpath">
+    <pathelement path="jaxws-binding-src" />
+    <pathelement path="jaxws-binding-classes" />
+    <pathelement path="schemas" />
+    <!--for use with bundled ant-->
+    <fileset dir="${jwsdp.home}" includes="lib/*.jar" />        
+  </path>
+
+  <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+    <classpath>
+      <fileset dir="${jwsdp.home}/" includes="lib/*.jar" />
+    </classpath>
+  </taskdef>
+  
+
+<target depends="clean" name="wsimport-client-TradingService" description="Compile all Java source files for TradingService">
+              <echo message="Compiling the schema..." />        
+               <mkdir dir="jaxws-binding-src" />
+	       <mkdir dir="jaxws-binding-classes" />
+               <wsimport fork="true"
+                         debug="false"
+                         verbose="true"
+                         xnocompile="true"
+                         XadditionalHeaders="true" 
+                         wsdl="WSDL/eBaySvc.wsdl" 
+                         sourcedestdir="jaxws-binding-src" 
+                         destdir="jaxws-binding-classes">
+                         <produces dir="jaxws-binding-src" includes="eBaySvc.java" casesensitive="no" />
+                         <jvmarg value="-Xms64m" />
+                         <jvmarg value="-Xmx256m" />
+                </wsimport>
+                   
+		<echo message="Compiling the java source files for TradingService ..." />
+		<javac destdir="jaxws-binding-classes" debug="on">
+		       <src path="jaxws-binding-src" />
+		       <classpath refid="classpath" />
+                </javac>
+    
+  </target>
+    
+    
+  <patternset id="dest.exclude">
+        <exclude name="jaxws-binding-src/" />
+        <exclude name="lib/"/>
+        <exclude name="jaxws-binding-classes/"/>
+        <exclude name="package cache/"/>
+        <exclude name="dependency cache/"/>
+        <exclude name="jsp cache/"/>
+  </patternset>
+  
+  
+  <target depends="wsimport-client-TradingService" name="archive" description="Compressing the java classes">
+      <mkdir dir="lib" />
+      <echo message="Compressing the java classes and making eBayTradingAPIStub.jar ..." />
+      <jar compress="true" destfile="lib/eBayTradingAPIStub.jar">
+        <fileset dir="jaxws-binding-classes">
+          <patternset refid="dest.exclude"/>
+          <include name="**/*.*"/>
+        </fileset>
+      </jar>
+  </target>
+
+  <target name="clean" description="Deletes all the generated artifacts.">
+    <delete dir="docs/api" />
+    <delete dir="jaxws-binding-src" />
+    <delete dir="schemas" />
+    <delete dir="lib" />
+    <delete dir="jaxws-binding-classes" />
+  </target>
+</project>

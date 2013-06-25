@@ -1,0 +1,77 @@
+<?xml version="1.0" standalone="yes"?>
+<!--
+    Document   : jaxb-codeGen.xml
+    Created on : September 10, 2010
+    Author     : zhuyang@ebay.com
+    
+-->
+<project basedir="." default="archive">
+  <description>
+    </description>
+  <property environment="env"/>
+  <property name="jwsdp.home" value="${env.JWSDP_HOME}"/>
+  
+   <property environment="env"/>
+   <property name="lib.home" value="${basedir}/lib"/>
+   <property name="ant.home" value="${env.ANT_HOME}"/>
+   <property name="jdk.home" value="${env.JAVA_HOME}"/> 
+   <property name="jwsdp.home" value="${env.JWSDP_HOME}"/>
+   <property name="dest" value="classes.ant"/>
+   <property name="tojava" value="tojava"/>
+   <property name="jaxb-src" value="${tojava}/jaxb-binding-src" />
+   <property name="jaxb-classes" value="${tojava}/jaxb-binding-classes" />
+  
+   <path id="classpath">
+      <fileset dir="${jwsdp.home}" includes="lib/*.jar" />     
+   </path>
+  
+
+   <taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+       <classpath>
+           <fileset dir="${jwsdp.home}/" includes="lib/*.jar" />
+       </classpath>
+   </taskdef>
+
+
+  <!--compile Java source files-->
+  <target depends="clean" name="compile" description="Compile all Java source files">
+    <echo message="parsing the schema..." />
+    <mkdir dir="${jaxb-src}" />
+    <xjc schema="XSD/ebaySvc.xsd" destdir="${jaxb-src}">
+      <produces dir="${jaxb-src}" includes="**/*.java" />
+    </xjc>
+    <echo message="Compiling the java source files..." />
+    <mkdir dir="${jaxb-classes}" />
+    <javac destdir="${jaxb-classes}" debug="on">
+      <src path="${jaxb-src}" />
+      <classpath refid="classpath" />
+    </javac>
+  </target>
+  
+  <patternset id="dest.exclude">
+        <exclude name="${jaxb-src}" />
+        <exclude name="lib/"/>
+        <exclude name="${jaxb-classes}"/>
+
+  </patternset>
+  
+  
+  <target depends="compile" name="archive" description="Compressing the java classes">
+      <mkdir dir="${lib.home}" />
+      <echo message="Compressing the java classes and making TradingClient.jar..." />
+      <jar compress="true" destfile="${lib.home}/TradingClient.jar">
+        <fileset dir="${jaxb-classes}">
+          <patternset refid="dest.exclude"/>
+          <include name="**/*.*"/>
+        </fileset> 
+      </jar>
+  </target>
+
+
+  <target name="clean" description="Deletes all the generated artifacts.">
+    <delete dir="${jaxb-src}" />
+    <delete dir="${jaxb-classes}" />
+    <delete file="${lib.home}/TradingClient.jar" />   
+  </target>
+</project>
+

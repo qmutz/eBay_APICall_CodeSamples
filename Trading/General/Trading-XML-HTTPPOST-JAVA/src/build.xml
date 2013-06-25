@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="run" >
+  <property environment="env"/>
+  <property name="jdk.home" value="${env.JAVA_HOME}"/> 
+  <property name="jwsdp.home" value="${env.JWSDP_HOME}"/>
+  <property name="dest" value="classes"/>
+  <property name="tradingClientLib.home" value="../../lib"/>
+  <property name="src" value="src"/>
+    <path id="run.classpath">
+          <pathelement location="${jdk.home}/lib/tools.jar"/>
+    	  <pathelement path="${dest}"/>
+          <fileset dir="${jwsdp.home}">
+              <include name="lib/*.jar"/>            
+          </fileset>
+          <fileset dir="${tradingClientLib.home}">
+            <include name="*.jar"/>            
+          </fileset>  
+    </path>
+
+  <target name="checkJavaHome" unless="env.JAVA_HOME">
+    	<fail>
+    	   "JAVA_HOME" environment variable is not set. You may set "JAVA_HOME" in
+    	   setenv.bat in the SDK root and run it.
+    	</fail>
+  </target>
+    
+  <target name="checkEnvironment">
+       <antcall target="checkJavaHome"/>
+  </target>
+   
+  <target depends="init" name="compile">
+    <javac debug="true" deprecation="true" destdir="${dest}" nowarn="false">
+        <classpath refid="run.classpath" />    
+    	<src path="${src}"/>
+    </javac>
+  </target>
+	
+    <target name="run" depends="compile"> 
+        <java classname="com.ebay.sample.AddFixedPriceItemSample"     
+            classpathref="run.classpath"
+            fork="true" maxmemory="256m">                
+        </java>    
+    </target>
+	
+  <target name="clean">
+    <delete failonerror="false" includeemptydirs="true">
+      <fileset dir="${dest}"/>
+    </delete>
+  </target>
+  <target name="init" depends="checkEnvironment">
+    <mkdir dir="${dest}"/>
+  </target>
+</project>

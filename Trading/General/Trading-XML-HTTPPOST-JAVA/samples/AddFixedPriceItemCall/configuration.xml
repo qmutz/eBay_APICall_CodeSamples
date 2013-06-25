@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<!--
+    Document   : configuration.xml
+    Created on : May 16, 2010
+    Author     : zhuyang@ebay.com
+-->
+
+<properties>
+  
+      <entry key="serverURL">https://api.sandbox.ebay.com/ws/api.dll</entry>
+      <entry key="userToken">YOUR SANDBOX TOKEN</entry>
+
+<!--
+    <<entry key="serverURL">https://api.ebay.com/ws/api.dll</entry>
+    <entry key="userToken">YOUR PRODUCTION TOKEN</entry>
+-->
+</properties>
