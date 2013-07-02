@@ -1,6 +1,6 @@
 INTRODUCTION
 ============
-This project contains samples for Listing Recommendations Servicxe API developed in eclipse using the HTTPCLient
+This project contains samples for Listing Recommendations Service API developed in eclipse using the HTTPCLient
 
 INSTRUCTIONS
 ============
