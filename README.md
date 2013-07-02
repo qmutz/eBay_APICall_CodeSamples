@@ -1,3 +1,3 @@
 eBay_APICall_CodeSamples
 ========================
-This reppssitory contains code samples.
+This repository contains code samples.
