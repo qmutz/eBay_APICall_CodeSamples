@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<GetSuggestedCategoriesRequest xmlns="urn:ebay:apis:eBLBaseComponents"> 
+  <RequesterCredentials> 
+    <eBayAuthToken>INSERT_TOKEN</eBayAuthToken> 
+  </RequesterCredentials> 
+  <Query>INSERT_QUERY</Query>
+</GetSuggestedCategoriesRequest>

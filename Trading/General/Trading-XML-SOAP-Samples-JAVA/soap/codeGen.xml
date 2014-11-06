@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<!-- ===================================================================
+<description>
+   Ebay Java SOAP Samples: Uses Ant to download the WSDL document
+   from Ebay, creates a Java client stub from the WSDL and then 
+   builds each of the five example classes into separate classes.
+</description>
+==================================================================== -->
+
+<project default="compile">
+
+	<!--<property name="axis.home" location="<Axis installation directory>" />-->
+	<property name="axis.home" location="C:/eBaySupport/Projects/CodeSampleUpdation/Java/axis2-1.4.1/" />
+	<property name="build.dir" location="."/>
+	<property name="build.dest" location="${build.dir}/bin"/>
+	<property name="debug" value="on" />
+	<path id="axis.classpath">
+		<fileset dir="${axis.home}/lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	
+	<taskdef name="axis-wsdl2java" classname="org.apache.axis.tools.ant.wsdl.Wsdl2javaAntTask">
+		<classpath refid="axis.classpath" />
+	</taskdef>
+	
+	<condition property="generateClient">
+		<or>
+			<not>
+			     <filesmatch file1="${build.dir}/work/ebaySvc.wsdl" 
+					file2="${build.dir}/ebaySvc.wsdl" />
+			</not>
+			<not>
+				<available file="${build.dir}/bin/ebaysoap.jar" type="file"/>
+			</not>
+		</or>
+	</condition>	
+
+	<target name="clean">
+		<mkdir dir="${build.dir}/bin"/>
+		<mkdir dir="${build.dir}/work"/>
+	</target>
+
+	<target name="copy" depends="clean">		
+		<get src="http://developer.ebay.com/webservices/latest/ebaySvc.wsdl" 
+		    dest="${build.dir}/work/ebaySvc.wsdl" 
+    		verbose="true"
+    		usetimestamp="true"/>	
+	</target>
+	<target name="generate" if="generateClient">
+		
+		<copy 
+			file="${build.dir}/work/ebaySvc.wsdl" 
+			tofile="${build.dir}/ebaySvc.wsdl"/>
+		
+		<axis-wsdl2java 
+			output="${build.dir}/work" 
+			serverside="false" 
+			skeletondeploy="false" 
+			url="${build.dir}/ebaySvc.wsdl" 
+			verbose="true" 
+			debug="true"
+	  		timeout="-1">
+	  		<mapping 
+	  			namespace="urn:ebay:apis:eBLBaseComponents" 
+	  			package="com.ebay.api.soap"/>
+	  	</axis-wsdl2java>
+		
+	</target>	
+	<target name="compile" depends="copy,generate">
+
+		<javac srcdir="${build.dir}/work" destdir="${build.dir}/work" debug="${debug}">
+      		<classpath refid="axis.classpath" />	
+    	</javac>
+		
+		<jar destfile="${build.dir}/bin/ebaysoap.jar">
+    		<fileset dir="${build.dir}/work" excludes="**/*.java"/>
+			<fileset dir="${build.dir}/work" excludes="**/*.wsdl"/>
+		</jar>
+	</target>
+
+	<target name="deploy"/>
+	<target name="run"/>
+	<target name="undeploy"/>
+</project>

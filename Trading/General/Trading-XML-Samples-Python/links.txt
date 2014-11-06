@@ -1,0 +1,2 @@
+<a href="http://www.python.org/">Python</a> homepage
+<a href="http://developer.ebay.com/xml/">eBay XML Developer Center</a>

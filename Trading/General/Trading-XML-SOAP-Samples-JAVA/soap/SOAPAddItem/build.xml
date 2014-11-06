@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Exported by JBuilder on Dec 6, 2004 11:20:27 AM-->
+<!--It is RECOMMENDED that JBuilder builds and Ant builds done with
+this exported Ant file be kept separate and be written to different
+directories. For example, the JBuilder output directory might be "classes"
+and the Ant output directory might be "classes.ant".-->
+<project basedir="." default="rebuild" >
+  <property environment="env"/>
+  <property name="jdk.home" value="${env.JAVA_HOME}"/> 
+  <property name="dest" value="classes.ant"/>
+  <property name="Generated.Source" value="${dest}/Temporary_Files"/>
+  <property name="axis.home" value="C:/eBaySupport/Projects/CodeSampleUpdation/Java/axis2-1.4.1/lib"/>
+  <property name="ebaysdkcore.home" value="../bin"/>
+  <property name="src" value="src"/>
+  <path id="project.class.path">
+    <pathelement location="${dest}"/>
+    <pathelement location="${axis.home}/axis-1.3.jar"/>
+    <pathelement location="${axis.home}/axis-ant.jar"/>
+    <pathelement location="${axis.home}/commons-discovery.jar"/>
+    <pathelement location="${axis.home}/commons-logging.jar"/>
+    <pathelement location="${axis.home}/jaxrpc.jar"/>
+    <pathelement location="${axis.home}/log4j-1.2.15.jar"/>
+    <pathelement location="${axis.home}/saaj.jar"/>
+    <pathelement location="${ebaysdkcore.home}/ebaysoap.jar"/>
+    <pathelement location="${jdk.home}/demo/jfc/Java2D/Java2Demo.jar"/>
+    <pathelement location="${jdk.home}/demo/plugin/jfc/Java2D/Java2Demo.jar"/>
+    <!-- pathelement location="${jdk.home}/jre/javaws/javaws.jar"/ -->
+    <pathelement location="${jdk.home}/jre/lib/charsets.jar"/>
+    <pathelement location="${jdk.home}/jre/lib/ext/dnsns.jar"/>
+    <pathelement location="${jdk.home}/jre/lib/ext/ldapsec.jar"/>
+    <pathelement location="${jdk.home}/jre/lib/ext/localedata.jar"/>
+    <pathelement location="${jdk.home}/jre/lib/ext/sunjce_provider.jar"/>
+    <pathelement location="${jdk.home}/jre/lib/im/indicim.jar"/>
+    <pathelement location="${jdk.home}/jre/lib/im/thaiim.jar"/>
+    <pathelement location="${jdk.home}/jre/lib/jce.jar"/>
+    <pathelement location="${jdk.home}/jre/lib/jsse.jar"/>
+    <pathelement location="${jdk.home}/jre/lib/plugin.jar"/>
+    <pathelement location="${jdk.home}/jre/lib/rt.jar"/>
+    <pathelement location="${jdk.home}/jre/lib/sunrsasign.jar"/>
+    <pathelement location="${jdk.home}/lib/dt.jar"/>
+    <pathelement location="${jdk.home}/lib/htmlconverter.jar"/>
+    <pathelement location="${jdk.home}/lib/tools.jar"/>
+  </path>
+  <!--Patternset to exclude files from the output directory:-->
+  <patternset id="dest.exclude">
+    <exclude name="Temporary_Files/"/>
+    <exclude name="Generated Source/"/>
+    <exclude name="package cache/"/>
+    <exclude name="dependency cache/"/>
+    <exclude name="jsp cache/"/>
+  </patternset>
+  <target depends="init" name="javacompile">
+    <javac bootclasspathref="project.class.path" debug="true" deprecation="true" destdir="${dest}" nowarn="false" source="1.2">
+      <src path="${src}"/>
+      <src path="${Generated.Source}"/>
+    </javac>
+  </target>
+  <target name="resource">
+    <copy todir="${dest}">
+      <fileset dir="${src}">
+        <include name="**/*.jpe"/>
+        <include name="**/*.jpeg"/>
+        <include name="**/*.rmf"/>
+        <include name="**/*.wav"/>
+        <include name="**/*.mid"/>
+        <include name="**/*.midi"/>
+        <include name="**/*.au"/>
+        <include name="**/*.gif"/>
+        <include name="**/*.png"/>
+        <include name="**/*.jpg"/>
+        <include name="**/*.aiff"/>
+        <include name="**/*.properties"/>
+      </fileset>
+    </copy>
+  </target>
+  <target name="javadoc"/>
+  <target depends="cleanup" name="clean"/>
+  <target name="precompile"/>
+  <target depends="javacompile" name="compile"/>
+  <target name="postcompile"/>
+  <target depends="javadoc,resource" name="package"/>
+  <target name="deploy"/>
+  <target depends="precompile,compile,postcompile,package,deploy" name="make"/>
+  <target depends="clean,make" name="rebuild"/>
+  <target name="cleanup">
+    <delete failonerror="false" includeemptydirs="true">
+      <fileset dir="${dest}"/>
+    </delete>
+  </target>
+  <target name="init">
+    <mkdir dir="${dest}"/>
+    <mkdir dir="${Generated.Source}"/>
+  </target>
+</project>

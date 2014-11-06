@@ -1,0 +1,61 @@
+eBay Transing Web Service client stub generation
+eBay Developers Program
+http://developer.ebay.com
+Last updated: July  2013
+--------------------------
+
+Getting Started:
+================
+
+1) Verify that you have Java 1.5.x or higher installed. You can verify your 
+   Java installation by opening a command prompt and typing:
+   
+	> java -version
+
+2) Verify that you have Apache Ant installed and that you have 
+   properly configured the ANT_HOME environment variable. You can 
+   read more about installing Ant here: 
+   
+   	http://ant.apache.org/manual/install.html
+   	
+   After installing Ant you can verify your installation by opening a command
+   prompt and typing:
+   
+	> ant
+
+   A successful installation of Ant should throw an error saying that 'build.xml
+   does not exist!'.
+
+3) Verify that you have the Apache Axis libraries on your system. Specifically,
+   you should have the following Java libraries in your $axis_install\lib\ directory:
+	
+	axis.jar
+	axis-ant.jar
+	commons-discovery.jar
+	commons-logging.jar
+	jaxrpc.jar
+	log4j-1.2.8.jar
+	saaj.jar
+	wsdl4j.jar
+	
+   where $axis_install is the location that you downloaded and unzipped Apache Axis 
+    to.  If you do not have the above jars, you can find them in the externalJars folder 
+	provided in the zipped package.
+
+4) Edit codeGen.xml build scirpt and make sure to point the axis.home property to your Axis installation directory
+
+5) Execute codeGen.xml as below to build eBay Transing Web Service client stub:
+   ant -f codeGen.xml 
+   
+   the Ant build script downloads the latest WSDL 
+      from the Ebay site, runs the WSDL2Java task (which creates Java classes from 
+      the WSDL). The build file checks to see if the local copy of the WSDL file is 
+      different from the copy available on:
+   
+   	http://developer.ebay.com/webservices/latest/ebaySvc.wsdl
+   
+      If the files match, the source files are not generated and the build proceeds
+   as normal.  
+
+  
+   
